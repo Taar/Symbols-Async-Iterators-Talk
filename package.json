@@ -5,5 +5,9 @@
   "main": "index.js",
   "repository": "git@github.com:Taar/Symbols-Async-Iterators-Talk.git",
   "author": "Randy Topliffe <randytopliffe@gmail.com>",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0"
+  }
 }
