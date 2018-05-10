@@ -277,6 +277,16 @@ window.addEventListener('load', function() {
       window.location.hash = n;
     }
     document.title = slideDiv.textContent || slideDiv.innerText;
+
+    // check to see if the slide has an animation registered, if so, run it
+    const animationElement = slideContainer.querySelector('div .animate-me');
+    if (animationElement != null) {
+      const animationFn = animationElement.getAttribute('data-animation-fn');
+      if (animationFn != null) {
+        console.log('has animation!', animationFn);
+        window[Symbol.for('animation-registry')][animationFn](animationElement);
+      }
+    }
   }
 
   function forward() {
