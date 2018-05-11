@@ -1,0 +1,10 @@
+pre {
+  margin:0;
+  padding:0.2em;
+  font-weight:normal;
+}
+
+pre em {
+  color:#000;
+  background:yellow;
+}

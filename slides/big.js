@@ -284,7 +284,7 @@ window.addEventListener('load', function() {
       const animationFn = animationElement.getAttribute('data-animation-fn');
       if (animationFn != null) {
         console.log('has animation!', animationFn);
-        window[Symbol.for('animation-registry')][animationFn](animationElement);
+        window[Symbol.for('animation-registry')][animationFn](animationElement, slideDiv);
       }
     }
   }

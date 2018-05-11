@@ -9,13 +9,56 @@ const toCenter = ({ eleWidth = 0, eleHeight = 0 }) => {
   return [x, y];
 };
 
-const slideRight = (element) => {
-  console.log('woot');
-  const divStyler = styler(element);
-  const width = element.clientWidth;
-  const height = element.clientHeight;
+/*
+ * Given two boxes, it'll return the x, y coord to place box1
+ * above and center of box2
+ * box1: { width, height, x, y }
+ * box2: { width, height, x, y }
+ */
+const toCenterAbove = (box1, box2) => {
+  const { width: b1w, height: b1h } = box1;
+  const { width: b2w, x: b2x, y: b2y } = box2;
+  // Note: in the browser, { x: 0, y: 0 } is the top, left corner.
+  const x = ((b2w / 2) + b2x) - (b1w / 2);
+  // to figure out the y, we need to subtract the box1's height with the box2's
+  // y position. This is because y0 is at the top of the page.
+  const y = b2y - b1h;
+  return [x, y];
+};
 
-  element.style.visibility = 'visible';
+const centerAbove = (animationElement, slideElement) => {
+  const selector = animationElement.getAttribute('data-element-selector');
+  const targetElement = slideElement.querySelector(selector);
+  const divStyler = styler(animationElement);
+
+  const animationRect = animationElement.getBoundingClientRect();
+  const targetRect = targetElement.getBoundingClientRect();
+
+  animationElement.style.visibility = 'visible';
+
+  const [x, y] = toCenterAbove(
+    animationRect,
+    targetRect,
+  );
+
+  tween({
+    from: {
+      x,
+      y: (animationRect.height + 100) * -1,
+    },
+    to: { x, y, rotate: 180 },
+    duration: 500,
+    ease: easing.backOut,
+  }).start(divStyler.set);
+
+};
+
+const slideRight = (animationElement) => {
+  const divStyler = styler(animationElement);
+  const width = animationElement.clientWidth;
+  const height = animationElement.clientHeight;
+
+  animationElement.style.visibility = 'visible';
 
   const [x, y] = toCenter({ eleWidth: width, eleHeight: height });
 
@@ -27,14 +70,11 @@ const slideRight = (element) => {
     to: { x, y, rotate: 180 },
     duration: 1000,
     ease: easing.backOut,
-    // flip: Infinity,
-    // elapsed: 500,
-    // loop: 5,
-    // yoyo: 5
   }).start(divStyler.set);
 
 };
 
 window[animationRegistrySymbol] = {
   slideRight,
+  centerAbove,
 };
