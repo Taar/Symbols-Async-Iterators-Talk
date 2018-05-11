@@ -1,4 +1,4 @@
-.animate-me {
+.animate-me.move {
   display: block;
   visibility: hidden;
   position: absolute;

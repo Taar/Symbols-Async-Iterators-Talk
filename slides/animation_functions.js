@@ -1,4 +1,4 @@
-const { easing, tween, styler } = window.popmotion;
+const { easing, tween, keyframes, styler } = window.popmotion;
 
 const animationRegistrySymbol = Symbol.for('animation-registry');
 
@@ -50,7 +50,6 @@ const centerAbove = (animationElement, slideElement) => {
     duration: 500,
     ease: easing.backOut,
   }).start(divStyler.set);
-
 };
 
 const slideRight = (animationElement) => {
@@ -71,10 +70,42 @@ const slideRight = (animationElement) => {
     duration: 1000,
     ease: easing.backOut,
   }).start(divStyler.set);
+};
 
+const powerUp = (animationElement) => {
+  const divStyler = styler(animationElement);
+
+  keyframes({
+    values: [
+      {
+        color: '#ffffff',
+      },
+      {
+        color: '#fcda00',
+      },
+      {
+        color: '#fc5c00',
+      },
+      {
+        color: '#fc0021',
+      },
+      {
+        color: '#fc5c00',
+      },
+      {
+        color: '#fcda00',
+      },
+      {
+        color: '#ffffff',
+      },
+    ],
+    duration: 3000,
+    loop: Infinity,
+  }).start(divStyler.set);
 };
 
 window[animationRegistrySymbol] = {
   slideRight,
   centerAbove,
+  powerUp,
 };
