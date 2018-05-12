@@ -10,7 +10,6 @@ window.addEventListener('load', function() {
 
   var body = document.body;
   var initialBodyClass = body.className;
-  // TODO make animations slides and add them to this slideDivs array
   var slideDivs = nodeListToArray(document.querySelectorAll('body > div'));
 
   if (!slideDivs.length) {
@@ -22,6 +21,11 @@ window.addEventListener('load', function() {
 
   var ASPECT_RATIO = 1.6;
   var timeoutInterval;
+
+  const animationState = {
+    animations: {},
+    running: [],
+  };
 
   // Read the contents of `notes` elements as strings, and then
   // get rid of the elements themselves so that they don't interfere with
@@ -64,11 +68,11 @@ window.addEventListener('load', function() {
      */
     reverse: reverse,
     /**
-     * Go to a numbered slide
+     * Go to a numbered slide or run animtaion
      * @function
      * @public
      */
-    go: go,
+    nextAction: nextAction,
     /**
      * The number of slides in this presentation
      * @type {number}
@@ -91,6 +95,20 @@ window.addEventListener('load', function() {
     );
     slideContainer.appendChild(slide);
     return slideContainer;
+  });
+
+  slideDivs.forEach((element, idx) => {
+    const animationElements = Array.from(element.querySelectorAll('div .animate-me'));
+    if (animationElements != null && animationElements.length > 0) {
+      animationState.animations[idx] = [];
+      animationElements.forEach((animationElement) => {
+        const animationFnName = animationElement.getAttribute('data-animation-fn');
+        if (animationFnName != null) {
+          const factory = window[Symbol.for('animation-registry')][animationFnName](animationElement, element);
+          animationState.animations[idx].push(factory);
+        }
+      });
+    }
   });
 
   body.className = 'talk-mode ' + initialBodyClass;
@@ -117,7 +135,27 @@ window.addEventListener('load', function() {
       '* press p to see the print view\n' +
       '* press t to go back to the talk view'
   );
-  go(parseHash() || big.current);
+
+  // TODO Fix scoping issues :(
+  // this should be a const
+  var nextAction = ({
+    n = 0, ignoreAnimations = false, dontSeek = false, force = false,
+  }) => {
+    n = Math.max(0, Math.min(big.length - 1, n));
+    if (ignoreAnimations || (animationState.queue.length === 0 && big.current !== n)) {
+      go(n, dontSeek, force);
+
+      // TODO setup for next slide animations if any
+      const animationFns = animationState.animations[n];
+      animationState.queue = [...animationFns];
+      return;
+    }
+    // TODO run animation
+    const animationFn = animationState.queue.shift();
+    animationState.running.push(animationFn());
+  };
+
+  nextAction({ n: parseHash() || big.current, ignoreAnimations: true });
 
   /**
    * Parse the current window's hash, returning a number for a
@@ -169,7 +207,10 @@ window.addEventListener('load', function() {
     })[0];
   }
 
-  // Navigation ================================================================
+  /**
+   * Navigation
+   */
+
   function goToAudio(n) {
     if (!big.audio || !big.playControl) return;
     big.playControl.style.cssText = n === 0
@@ -225,11 +266,20 @@ window.addEventListener('load', function() {
     // Ensure that the slide we're going to is in range: it isn't
     // less than 0 or higher than the actual number of slides available.
     n = Math.max(0, Math.min(big.length - 1, n));
+
     // Avoid doing extra work if we're going from a slide to itself.
     if (!force && big.current === n) return;
-    big.current = n;
     var slideContainer = slideDivs[n];
     var slideDiv = slideContainer.firstChild;
+
+    // Sets all animations to the beginning of their animation then stop them
+    // this will make sure the animation div is place at the beginning so when
+    // when you next navigate to the slide, the animated elements are in the 
+    // correct states
+    animationState.running.forEach(animation => animation.pause().seek(0).stop());
+    animationState.queue = [];
+
+    big.current = n;
     printNotesToConsole(n);
 
     if (!dontSeek) {
@@ -278,29 +328,14 @@ window.addEventListener('load', function() {
       window.location.hash = n;
     }
     document.title = slideDiv.textContent || slideDiv.innerText;
-
-    // check to see if the slide has an animation registered, if so, run it
-    const animationElements = Array.from(slideContainer.querySelectorAll('div .animate-me'));
-    if (animationElements != null && animationElements.length > 0) {
-      animationElements.forEach((animationElement) => {
-        const animationFn = animationElement.getAttribute('data-animation-fn');
-        if (animationFn != null) {
-          console.log('has animation!', animationFn);
-          window[Symbol.for('animation-registry')][animationFn](
-            animationElement,
-            slideDiv,
-          );
-        }
-      });
-    }
   }
 
   function forward() {
-    go(big.current + 1);
+    nextAction({ n: big.current + 1 });
   }
 
   function reverse() {
-    go(big.current - 1);
+    nextAction({ n: big.current - 1, ignoreAnimations: true });
   }
 
   /**
@@ -335,7 +370,9 @@ window.addEventListener('load', function() {
     }
   }
 
-  // Event listeners ===========================================================
+  /**
+   * Event Listeners
+   */
 
   function onPrint() {
     if (big.mode === 'print') return;
@@ -376,7 +413,12 @@ window.addEventListener('load', function() {
     if (typeof i === 'number') {
       goTo = i;
     }
-    go(goTo, false, true);
+    nextAction({
+      n: goTo,
+      dontSeek: false,
+      force: true,
+      ignoreAnimations: true
+    });
   }
 
   function onJump() {
@@ -407,7 +449,7 @@ window.addEventListener('load', function() {
 
   function onClick(e) {
     if (big.mode !== 'talk') return;
-    if (e.target.tagName !== 'A') go((big.current + 1) % big.length);
+    if (e.target.tagName !== 'A') nextAction({ n: (big.current + 1) % big.length });
   }
 
   function onKeyDown(e) {
@@ -471,14 +513,18 @@ window.addEventListener('load', function() {
         big.audio.textTracks[0].cues[ci].endTime > big.audio.currentTime &&
         big.current - 1 !== ci
       ) {
-        return go(ci + 1, true);
+        return nextAction({
+          n: ci + 1,
+          dontSeek: true,
+          ignoreAnimations: true,
+        });
       }
     }
   }
 
   function onHashChange() {
     if (big.mode !== 'talk') return;
-    go(parseHash());
+    nextAction({ n: parseHash(), ignoreAnimations: true });
   }
 
   function onResize() {

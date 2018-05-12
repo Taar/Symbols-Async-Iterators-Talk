@@ -26,7 +26,7 @@ const toCenterAbove = (box1, box2) => {
   return [x, y];
 };
 
-const centerAbove = (animationElement, slideElement) => {
+const centerAbove = (animationElement, slideElement) => () => {
   const selector = animationElement.getAttribute('data-element-selector');
   const targetElement = slideElement.querySelector(selector);
   const divStyler = styler(animationElement);
@@ -41,7 +41,7 @@ const centerAbove = (animationElement, slideElement) => {
     targetRect,
   );
 
-  tween({
+  return tween({
     from: {
       x,
       y: (animationRect.height + 100) * -1,
@@ -52,7 +52,7 @@ const centerAbove = (animationElement, slideElement) => {
   }).start(divStyler.set);
 };
 
-const slideRight = (animationElement) => {
+const slideRight = animationElement => () => {
   const divStyler = styler(animationElement);
   const width = animationElement.clientWidth;
   const height = animationElement.clientHeight;
@@ -61,7 +61,7 @@ const slideRight = (animationElement) => {
 
   const [x, y] = toCenter({ eleWidth: width, eleHeight: height });
 
-  tween({
+  return tween({
     from: {
       x: (width + 100) * -1,
       y: (height + 100) * -1,
@@ -72,10 +72,10 @@ const slideRight = (animationElement) => {
   }).start(divStyler.set);
 };
 
-const powerUp = (animationElement) => {
+const powerUp = animationElement => () => {
   const divStyler = styler(animationElement);
 
-  keyframes({
+  return keyframes({
     values: [
       {
         color: '#ffffff',
