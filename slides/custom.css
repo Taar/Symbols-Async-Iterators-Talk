@@ -1,5 +1,7 @@
 body {
   overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
 pre {
@@ -12,4 +14,12 @@ pre {
 pre em {
   color:#000;
   background:yellow;
+}
+
+.top-corner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1.5rem;
+  padding: .3rem;
 }

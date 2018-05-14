@@ -13,24 +13,29 @@
   </style>
   <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/popmotion/dist/popmotion.global.min.js"></script>
+  <script src="animation_functions.js"></script>
   <script src='big.js'></script>
   <script src='highlight.js'></script>
-  <script src="animation_functions.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body class='dark'>
+  <span class="top-corner">
+    <span class="domain">https://github.com/Taar/Symbols-Async-Iterators-Talk</span>
+    <span class="section"></span>
+  </span>
   <div>
     <h1>Symbols, Iterators, &amp; Async Iterators</h1>
     <div class="animate-me"
          data-animation-fn="powerUp">
       <p>Leveling up your JavaScript</p>
     </div>
-    <div class="animate-me move"
-      data-animation-fn="slideRight"
-      data-animation-from="top-right"
-      data-animation-to="top-right"
-      >
-      Also Generators :D
+  </div>
+  <div>
+    <div class="animate-me move relative-size"
+      data-animation-fn="slideFromTo"
+      data-animation-from="3x1"
+      data-animation-to="center">
+      Also Generators
     </div>
   </div>
   <div>
