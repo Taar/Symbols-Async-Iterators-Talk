@@ -23,6 +23,14 @@ pre em {
   padding: .3rem;
 }
 
+.top-right-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.5rem;
+  padding: .3rem;
+}
+
 .red {
   color: rgba(255, 0, 0, 0.7);
 }

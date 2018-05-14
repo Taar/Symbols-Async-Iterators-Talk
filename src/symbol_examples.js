@@ -17,6 +17,10 @@ const SymbolExample = (console) => {
   // Symbols are unqiue!
   console.log(mySymbol === mySymbolTwo);
 
+  // string passed into the symbol is only use for debugging
+  // most browser dev tools will call .toString on a symbol if passed to console.log
+  console.log(mySymbol.toString());
+
   // Symbol is a Factory function, therefore you can't use it with the new keyword
   try {
     // eslint-disable-next-line
