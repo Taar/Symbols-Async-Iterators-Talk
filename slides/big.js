@@ -145,12 +145,14 @@ window.addEventListener('load', function() {
     if (ignoreAnimations || (animationState.queue.length === 0 && big.current !== n)) {
       go(n, dontSeek, force);
 
-      // TODO setup for next slide animations if any
-      const animationFns = animationState.animations[n];
-      animationState.queue = [...animationFns];
+      if (animationState.animations.hasOwnProperty(n)) {
+        const animationFns = animationState.animations[n];
+        animationState.queue = [...animationFns];
+      } else {
+        animationState.queue = [];
+      }
       return;
     }
-    // TODO run animation
     const animationFn = animationState.queue.shift();
     animationState.running.push(animationFn());
   };

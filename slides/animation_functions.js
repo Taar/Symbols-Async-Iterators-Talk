@@ -131,6 +131,33 @@ const slideFromTo = grid => animationElement => () => {
   }).start(divStyler.set);
 };
 
+const below = (animationElement, slideElement) => () => {
+  const selector = animationElement.getAttribute('data-element-selector');
+  const targetElement = slideElement.querySelector(selector);
+  const divStyler = styler(animationElement);
+
+  const animationRect = animationElement.getBoundingClientRect();
+  const targetRect = targetElement.getBoundingClientRect();
+
+  animationElement.style.visibility = 'visible';
+
+  const { x, y } = targetRect;
+
+  return tween({
+    from: {
+      x,
+      y: (animationRect.height + 100) * -1,
+    },
+    to: {
+      x,
+      y, // not sure why I don't need to add the target's height here
+      rotate: 180,
+    },
+    duration: 500,
+    ease: easing.backOut,
+  }).start(divStyler.set);
+};
+
 const centerAbove = (animationElement, slideElement) => () => {
   const selector = animationElement.getAttribute('data-element-selector');
   const targetElement = slideElement.querySelector(selector);
@@ -220,6 +247,7 @@ window.addEventListener('load', () => {
     slideRight,
     centerAbove,
     powerUp,
+    below,
     slideFromTo: slideFromTo(BODY_GRID),
   };
 });

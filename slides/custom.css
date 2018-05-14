@@ -8,7 +8,6 @@ pre {
   margin:0;
   padding:0.2em;
   font-weight:normal;
-  margin-right: 5em;
 }
 
 pre em {
@@ -22,4 +21,8 @@ pre em {
   left: 0;
   font-size: 1.5rem;
   padding: .3rem;
+}
+
+.red {
+  color: rgba(255, 0, 0, 0.7);
 }

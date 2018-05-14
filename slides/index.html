@@ -35,14 +35,78 @@
       data-animation-fn="slideFromTo"
       data-animation-from="3x1"
       data-animation-to="center">
-      Also Generators
+      Generators
+      <pre>
+<code class="javascript">
+yield moarPizza;
+</code>
+      </pre>
     </div>
   </div>
   <div>
-    <div class="animate-me move" data-animation-fn="slideRight">
+    Symbols
+  </div>
+  <div>
+    <pre>
+<code class="javascript">
+typeof Symbol('pizza');
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".javascript :first-child">
+// symbol
+</div>
+</code>
+    </pre>
+    <notes>Primitive Type</notes>
+  </div>
+  <div>
+    <pre>
+<code class="javascript">
+const pizzaSymbol = Symbol('pizza');
+
+new Symbol(':(');
+</code>
+    </pre>
+    <notes>Factory - new keyword will throw an error if used</notes>
+  </div>
+  <div>
+    <div class="animate-me move red"
+         data-animation-fn="centerAbove"
+         data-element-selector=".javascript :nth-child(2)">
+      <i class="fas fa-angle-double-down"></i>
+      Optional
       <i class="fas fa-angle-double-down"></i>
     </div>
-    <i class="fas fa-angle-double-up"></i>
+    <pre>
+<code class="javascript">
+Symbol('pizza').toString();
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".javascript :first-child">
+// 'Symbol(pizza)'
+</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".javascript :last-child">
+// 'Symbol()'
+</div>
+</code>
+    </pre>
+    <notes>The string passed into Symbol is for debugging purposes. Also helps with
+    code readability</notes>
+  </div>
+  <div>
+    <pre>
+<code class="javascript">
+Symbol('pizza') === Symbol('pizza');
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".javascript :first-child">
+// false
+</div>
+</code>
+    </pre>
+    <notes>Symbols are unique not matter what string you pass in</notes>
   </div>
   <div>
     <div class="animate-me move"
@@ -53,9 +117,9 @@
       <i class="fas fa-angle-double-down"></i>
     </div>
     <pre>
-      <code class="javascript">
-        console.log('Hello, world!');
-      </code>
+<code class="javascript">
+console.log('Hello, world!');
+</code>
     </pre>
   </div>
 </body>
