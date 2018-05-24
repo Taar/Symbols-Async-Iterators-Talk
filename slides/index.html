@@ -12,7 +12,7 @@
     .new-shiny { background: #aaaaaa; }
   </style>
   <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/popmotion/dist/popmotion.global.min.js"></script>
+  <script src="https://unpkg.com/popmotion/dist/popmotion.min.js"></script>
   <script src="animation_functions.js"></script>
   <script src='big.js'></script>
   <script src='highlight.js'></script>
@@ -20,12 +20,13 @@
 </head>
 <body class='dark'>
   <span class="top-corner">
-    <span class="domain">https://github.com/Taar/Symbols-Async-Iterators-Talk</span>
+    <span class="domain"><i class="fab fa-github"></i> Taar/Symbols-Async-Iterators-Talk</span>
     <span class="section"></span>
   </span>
   <span class="top-right-corner">
     @RandyTopliffe
   </span>
+
   <div>
     <h1>Symbols, Iterators, &amp; Async Iterators</h1>
     <div class="animate-me"
@@ -33,6 +34,7 @@
       <p>Leveling up your JavaScript</p>
     </div>
   </div>
+
   <div>
     <div class="animate-me move relative-size"
       data-animation-fn="slideFromTo"
@@ -46,9 +48,11 @@ yield moarPizza;
       </pre>
     </div>
   </div>
+
   <div>
     Symbols
   </div>
+
   <div>
     <pre>
 <code class="javascript">
@@ -62,16 +66,23 @@ typeof Symbol('pizza');
     </pre>
     <notes>Primitive Type</notes>
   </div>
+
   <div>
     <pre>
 <code class="javascript">
 const pizzaSymbol = Symbol('pizza');
 
 new Symbol(':(');
+<div class="animate-me move red"
+     data-animation-fn="below"
+     data-element-selector=".javascript :nth-child(4)">
+// <i class="fas fa-exclamation-triangle"></i> TypeError
+</div>
 </code>
     </pre>
     <notes>Factory - new keyword will throw an error if used</notes>
   </div>
+
   <div>
     <div class="animate-me move red"
          data-animation-fn="centerAbove"
@@ -98,6 +109,7 @@ Symbol('pizza').toString();
     <notes>The string passed into Symbol is for debugging purposes. Also helps with
     code readability</notes>
   </div>
+
   <div>
     <pre>
 <code class="javascript">
@@ -111,19 +123,6 @@ Symbol('pizza') === Symbol('pizza');
     </pre>
     <notes>Symbols are unique not matter what string you pass in</notes>
   </div>
-  <div>
-    <div class="animate-me move"
-         data-animation-fn="centerAbove"
-         data-element-selector=".javascript :nth-child(2)">
-      <i class="fas fa-angle-double-down"></i>
-      <i class="fas fa-angle-double-down"></i>
-      <i class="fas fa-angle-double-down"></i>
-    </div>
-    <pre>
-<code class="javascript">
-console.log('Hello, world!');
-</code>
-    </pre>
-  </div>
+
 </body>
 </html>
