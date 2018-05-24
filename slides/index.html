@@ -49,8 +49,14 @@ yield moarPizza;
     </div>
   </div>
 
+  <!-- END SYMBOLS -->
+
   <div>
-    Symbols
+    <pre>
+<code class="javascript">
+  Symbol();
+</code>
+    </pre>
   </div>
 
   <div>
@@ -123,6 +129,92 @@ Symbol('pizza') === Symbol('pizza');
     </pre>
     <notes>Symbols are unique not matter what string you pass in</notes>
   </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+const myGlobalSymbol = Symbol.for('myGlobalSymbol');
+
+<span class="animation-anchor-one"></span>myGlobalSymbol === Symbol.for('myGlobalSymbol');
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".javascript .animation-anchor-one">
+// true
+</div>
+</code>
+    </pre>
+    <notes>
+      If you need a global symbol you can register it in the Global registry.
+      `Symbol.for` will create a new symbol if it doesn't already exist.
+      You can retrieve it by using the key given to `Symbol.for`.
+    </notes>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+Symbol.keyFor(myGlobalSymbol);
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".javascript :first-child">
+// 'myGlobalSymbol'
+</div>
+</code>
+    </pre>
+    <notes>
+      If you have a reference to a symbol and what to know it's key in the global registry
+    </notes>
+  </div>
+
+  <div>How is this useful?</div>
+
+  <div>
+    <pre>
+<code class="javascript">
+// Computed Property names
+const foo = { bar: 'woah' };
+const event = 'click';
+const obj = {
+  [1]: 'one',
+  [foo]: 'wat',
+  [`on${click}`]: () =&gt; {},
+};
+</div>
+</code>
+    </pre>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+const <span class="animation-anchor-one">Person</span> = (() =&gt; {
+  <span class="animation-anchor-three">const invited = Symbol('invited');
+
+  <span class="animation-anchor-two">return</span> class Person_ {
+    // ...
+  };</span>
+})();  // closure
+</code>
+    </pre>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+  const invited = Symbol('invited');
+
+  return class Person_ {
+    constructor({ name, invite = false }) {
+      this.name = name;
+      this[invited] = invite;
+    }
+    // ...
+  }
+</code>
+    </pre>
+  </div>
+
+  <!-- END SYMBOLS -->
 
 </body>
 </html>
