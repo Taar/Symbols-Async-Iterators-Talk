@@ -49,7 +49,7 @@ yield moarPizza;
     </div>
   </div>
 
-  <!-- END SYMBOLS -->
+  <!-- START SYMBOLS -->
 
   <div>
     <pre>
@@ -172,8 +172,6 @@ Symbol.keyFor(myGlobalSymbol);
     <pre>
 <code class="javascript">
 // Computed Property names
-const foo = { bar: 'woah' };
-const event = 'click';
 const obj = {
   [1]: 'one',
   [foo]: 'wat',
@@ -187,13 +185,45 @@ const obj = {
   <div>
     <pre>
 <code class="javascript">
-const <span class="animation-anchor-one">Person</span> = (() =&gt; {
-  <span class="animation-anchor-three">const invited = Symbol('invited');
+const <div class="animation-anchor one">Person</div> = (() =&gt; {
+  <div class="animation-anchor two"></span>const invitedS = Symbol('invited');
 
-  <span class="animation-anchor-two">return</span> class Person_ {
-    // ...
-  };</span>
+<div class="animation-anchor three">return</div> class Person_ {
+  // ...
+};</div>
 })();  // closure
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move green"
+         data-animation-fn="centerLeftOf"
+         data-element-selector=".animation-anchor.two">
+      <i class="fas fa-angle-double-right"></i><br />
+      <i class="fas fa-angle-double-right"></i><br />
+      <i class="fas fa-angle-double-right"></i><br />
+      <i class="fas fa-angle-double-right"></i><br />
+      <i class="fas fa-angle-double-right"></i>
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.three">
+    </div>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+  // ...
+  constructor({ name, invite = false }) {
+    this.name = name;
+    this[<span class="animation-anchor-one">invitedS</span>] = invite;
+  }
+  // ...
 </code>
     </pre>
   </div>
@@ -201,17 +231,82 @@ const <span class="animation-anchor-one">Person</span> = (() =&gt; {
   <div>
     <pre>
 <code class="javascript">
-  const invited = Symbol('invited');
-
-  return class Person_ {
-    constructor({ name, invite = false }) {
-      this.name = name;
-      this[invited] = invite;
-    }
-    // ...
+  // ...
+  set isInvited(inviteStatus) {
+    this[invitedS] = inviteStatus;
   }
+
+  get isInvited() {
+    return this[invitedS];
+  }
+  // ...
 </code>
     </pre>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+  // ...
+  // Works with Object.prototype.toString()
+  get [Symbol.toStringTag]() {
+    return this.name;
+  }
+  // ...
+</code>
+    </pre>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+  const dwight = new Person({ name: 'Dwight', invite: true });
+
+  dwight.isInvited;
+  // true
+</code>
+    </pre>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+  dwight.toString()
+  // 'Dwight'
+  `${dwight}`
+  // 'Dwight'
+</code>
+    </pre>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+  JSON.stringify(dwight);
+  // { "name": "Dwight" }
+</code>
+    </pre>
+    <notes>JSON.stringify() ignores Symbol-keyed properties</notes>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+  Object.getOwnPropertyNames(dwight);
+  // Array [ 'name' ]
+</code>
+    </pre>
+    <notes>Doesn't show Symbol-keyed properties</notes>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+  Object.getOwnPropertySymbols(dwight);
+  // Array [ 'symbol('invited')' ]
+</code>
+    </pre>
+    <notes>Only get Symbol-keyed properties</notes>
   </div>
 
   <!-- END SYMBOLS -->

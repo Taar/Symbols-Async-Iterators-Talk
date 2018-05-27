@@ -6,6 +6,14 @@
   left: 0;
 }
 
+.animation-anchor {
+  display: inline-block;
+}
+
+.animate-me.highlight {
+  display: inline-block;
+}
+
 .relative-size {
   font-size: 5rem !important;
 }

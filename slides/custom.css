@@ -34,3 +34,7 @@ pre em {
 .red {
   color: rgba(255, 0, 0, 0.7);
 }
+
+.green {
+  color: rgba(0, 255, 0, 0.7);
+}

@@ -184,6 +184,30 @@ const centerAbove = (animationElement, slideElement) => () => {
   }).start(divStyler.set);
 };
 
+const centerLeftOf = (animationElement, slideElement) => () => {
+  const selector = animationElement.getAttribute('data-element-selector');
+  const targetElement = slideElement.querySelector(selector);
+  const divStyler = styler(animationElement);
+
+  const animationRect = animationElement.getBoundingClientRect();
+  const targetRect = targetElement.getBoundingClientRect();
+
+  animationElement.style.visibility = 'visible';
+
+  const x = targetRect.x - animationRect.width;
+  const y = targetRect.y + (targetRect.height / 2) -(animationRect.height / 2);
+
+  return tween({
+    from: {
+      x: (animationRect.width + 100) * -1,
+      y,
+    },
+    to: { x, y },
+    duration: 500,
+    ease: easing.backOut,
+  }).start(divStyler.set);
+};
+
 const slideRight = animationElement => () => {
   const divStyler = styler(animationElement);
   const width = animationElement.clientWidth;
@@ -240,6 +264,38 @@ const powerUp = animationElement => () => {
   }).start(divStyler.set);
 };
 
+const underline = (animationElement, slideElement) => () => {
+  const selector = animationElement.getAttribute('data-element-selector');
+  const targetElement = slideElement.querySelector(selector);
+  const color = animationElement.getAttribute('data-color');
+  const divStyler = styler(animationElement);
+
+  const animationRect = animationElement.getBoundingClientRect();
+  const targetRect = targetElement.getBoundingClientRect();
+
+  animationElement.style.visibility = 'visible';
+
+  divStyler.set({
+    x: targetRect.x,
+    y: targetRect.height + targetRect.y,
+    width: 0,
+    height: '5px',
+    background: color,
+  });
+
+  return keyframes({
+    values: [
+      {
+        width: 0,
+      },
+      {
+        width: targetRect.width,
+      },
+    ],
+    duration: 1500,
+  }).start(divStyler.set);
+};
+
 window.addEventListener('load', () => {
   const BODY_GRID = gridFactory(document.body);
 
@@ -249,5 +305,7 @@ window.addEventListener('load', () => {
     powerUp,
     below,
     slideFromTo: slideFromTo(BODY_GRID),
+    centerLeftOf,
+    underline,
   };
 });
