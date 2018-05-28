@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-restricted-syntax */
 
 /*
  * Part 2: Iterators `[Symbol.iterator]`
@@ -32,7 +32,6 @@ const Person = (() => {
 
 /* eslint-disable-next-line no-unused-vars */
 const IteratorsExample = (console) => {
-
   /* Only works with Native JS
    * NOTE: Very interesting, need to look into this more
   class Party extends Set {
@@ -48,20 +47,20 @@ const IteratorsExample = (console) => {
     const guestList = Symbol('guestList');
 
     return class Party_ {
-      constructor (guests = []) {
+      constructor(guests = []) {
         this[guestList] = new Set(guests);
       }
 
-      add (guest) {
+      add(guest) {
         this[guestList].add(guest);
       }
 
       // There is a better way to do this
-      get guestList () {
+      get guestList() {
         return this[guestList].values();
       }
 
-      [Symbol.iterator] () {
+      [Symbol.iterator]() {
         // [Symbol.iterator] needs to return an iterator
         // Luckily for us, the Set object has an iterator for all the values in the set
         // therefore we can just return that.
@@ -69,15 +68,15 @@ const IteratorsExample = (console) => {
         // eg return Array.from(this[guestList].values());
         return this[guestList].values();
       }
-    }
+    };
   })();
 
   const party2018 = new Party();
-  party2018.add(new Person({name: 'Jim', invite: true}));
-  party2018.add(new Person({name: 'Pam', invite: true}));
-  party2018.add(new Person({name: 'Michael', invite: false}));
-  party2018.add(new Person({name: 'Dwight', invite: true}));
-  party2018.add(new Person({name: 'Andy', invite: true}));
+  party2018.add(new Person({ name: 'Jim', invite: true }));
+  party2018.add(new Person({ name: 'Pam', invite: true }));
+  party2018.add(new Person({ name: 'Michael', invite: false }));
+  party2018.add(new Person({ name: 'Dwight', invite: true }));
+  party2018.add(new Person({ name: 'Andy', invite: true }));
   const guests = party2018.guestList;
   // Iterators return an object like { name: Function }
   console.log(guests.next);
@@ -89,7 +88,7 @@ const IteratorsExample = (console) => {
   console.log(guests.next());
   console.log(guests.next());
   console.log(guests.next());
-  console.log('---')
+  console.log('---');
   console.log(Array.from(party2018.guestList));
   for (const guest of party2018.guestList) {
     console.log('guestList', guest);
@@ -98,7 +97,6 @@ const IteratorsExample = (console) => {
   for (const guest of party2018) {
     console.log('Symbol.iterator', guest);
   }
-
 };
 
 window[Symbol.for('functionReference')] = IteratorsExample;

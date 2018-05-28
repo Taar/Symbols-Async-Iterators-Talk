@@ -477,11 +477,11 @@ const Party = (() =&gt; {
     <pre>
 <code class="javascript">
 // ...
-constructor (guests = []) {
+constructor(guests = []) {
   this[<div class="animation-anchor one">guestListS</div>] = new Set(guests);
 }
 
-add (guest) {
+add(guest) {
   this[<div class="animation-anchor two">guestListS</div>].add(guest);
 }
 // ...
@@ -503,11 +503,11 @@ add (guest) {
     <pre>
 <code class="javascript">
 const party2018 = new Party();
-party2018.add(new Person({name: 'Jim', invite: true}));
-party2018.add(new Person({name: 'Pam', invite: true}));
-party2018.add(new Person({name: 'Michael', invite: false}));
-party2018.add(new Person({name: 'Dwight', invite: true}));
-party2018.add(new Person({name: 'Andy', invite: true}));
+party2018.add(new Person({ name: 'Jim', invite: true }));
+party2018.add(new Person({ name: 'Pam', invite: true }));
+party2018.add(new Person({ name: 'Michael', invite: false }));
+party2018.add(new Person({ name: 'Dwight', invite: true }));
+party2018.add(new Person({ name: 'Andy', invite: true }));
 </code>
     </pre>
   </div>
@@ -591,10 +591,10 @@ for (const <div class="animation-anchor three">guest</div> <div class="animation
     <pre>
 <code class="javascript">
 // ... Party class
-<div class="animation-anchor one">[Symbol.iterator] ()</div> {
+<div class="animation-anchor one">[Symbol.iterator]()</div> {
   <div class="animation-anchor two">return this[guestList].values();</div>
 }
-// ... 
+// ...
 </code>
     </pre>
     <div class="animate-me move"
