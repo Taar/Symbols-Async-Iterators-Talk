@@ -404,6 +404,282 @@ const <div class="animation-anchor one">Person</div> = (() =&gt; {
     </pre>
   </div>
 
+  <div>
+    <pre>
+<code class="javascript">
+const <div class="animation-anchor one">iterFactory = () =&gt;</div> {
+  let value = 0;
+  <div class="animation-anchor two">return {</div>
+    <div class="animation-anchor three">next: () =&gt;</div> {
+      value += 1;
+      if (count &lt;= 10) {
+        <div class="animation-anchor four">return { value, done: false };</div>
+      }
+      <div class="animation-anchor five">return { done: true };</div>
+    }
+  }
+}
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.three">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.four">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.five">
+    </div>
+    <notes>
+      A function that returns an object with the property next.
+      Next needs to return an object with value and done. Value being the object in the iteration and done
+      being true if there are no more objects to return.
+      Generators are one way, you can't go backwards. To do that you'll need to call the iterator function again.
+    </notes>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+const Party = (() =&gt; {
+  const <div class="animation-anchor one">guestListS = Symbol('guestList')</div>;
+
+  return class Party_ {
+    // ...
+  };
+})();
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+// ...
+constructor (guests = []) {
+  this[<div class="animation-anchor one">guestListS</div>] = new Set(guests);
+}
+
+add (guest) {
+  this[<div class="animation-anchor two">guestListS</div>].add(guest);
+}
+// ...
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
+    </div>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+const party2018 = new Party();
+party2018.add(new Person({name: 'Jim', invite: true}));
+party2018.add(new Person({name: 'Pam', invite: true}));
+party2018.add(new Person({name: 'Michael', invite: false}));
+party2018.add(new Person({name: 'Dwight', invite: true}));
+party2018.add(new Person({name: 'Andy', invite: true}));
+</code>
+    </pre>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+// ...
+<div class="getter-setter">get</div> guestList () {
+  return this[guestList].<div class="animation-anchor one">values()</div>;
+}
+// ...
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <notes>.values() is a method of Set which returns an Iterator of the values in the Set</notes>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+const guests = party2018.guestList;
+<div class="animation-anchor one">guests.next</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.one">
+// function next { ... }
+</div>
+<div class="animation-anchor two">guests.next()</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.two">
+// { value: 'Jim', done: true }
+</div>
+<div class="animation-anchor three">guests.next()</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.three">
+// { value: undefined, done: true }
+</div>
+</code>
+    </pre>
+    <notes>
+      Iterators return an object like { name: Function }
+      next should return { value: Object, done: Boolean }
+      done will be true when there are no more items to iterator over.
+    </notes>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+for (const <div class="animation-anchor three">guest</div> <div class="animation-anchor one">of</div> <div class="animation-anchor two">party2018.guestList</div>) {
+  console.log(guest);
+}
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.three">
+    </div>
+    <notes></notes>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+// ... Party class
+<div class="animation-anchor one">[Symbol.iterator] ()</div> {
+  <div class="animation-anchor two">return this[guestList].values();</div>
+}
+// ... 
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
+    </div>
+    <notes>
+      [Symbol.iterator] needs to return an iterator
+      Luckily for us, the Set object has an iterator for all the values in the set
+      therefore we can just return that.
+    </notes>
+  </div>
+
+  <div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <pre>
+<code class="javascript">
+const guests = <div class="animation-anchor one">party2018[Symbol.iterator]()</div>;
+<div class="animation-anchor two">guests.next();</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.two">
+// { value: 'Jim', done: false }
+</div>
+</code>
+    </pre>
+    <notes>
+    </notes>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+for (const <div class="animation-anchor three">guest</div> <div class="animation-anchor one">of</div> <div class="animation-anchor two">party2018</div>) {
+  console.log(guest);
+}
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.three">
+    </div>
+    <notes></notes>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+<div class="animation-anchor one">Array.from(party2018.guestList);</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.one">
+// Array [ ... ]
+</div>
+<div class="animation-anchor two">Array.from(party2018);</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.two">
+// Array [ ... ]
+</div>
+</code>
+    </pre>
+  </div>
+
   <!-- END ITERATORS -->
 
 </body>

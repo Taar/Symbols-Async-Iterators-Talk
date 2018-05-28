@@ -47,7 +47,7 @@ const IteratorsExample = (console) => {
   const Party = (() => {
     const guestList = Symbol('guestList');
 
-    class Party {
+    return class Party_ {
       constructor (guests = []) {
         this[guestList] = new Set(guests);
       }
@@ -70,8 +70,6 @@ const IteratorsExample = (console) => {
         return this[guestList].values();
       }
     }
-
-    return Party;
   })();
 
   const party2018 = new Party();
@@ -80,21 +78,25 @@ const IteratorsExample = (console) => {
   party2018.add(new Person({name: 'Michael', invite: false}));
   party2018.add(new Person({name: 'Dwight', invite: true}));
   party2018.add(new Person({name: 'Andy', invite: true}));
-  const guestsIter = party2018.guestList;
+  const guests = party2018.guestList;
   // Iterators return an object like { name: Function }
-  console.log(guestsIter.next);
+  console.log(guests.next);
   // next should return { value: Object, done: Boolean }
   // done will be true when there are no more items to iterator over.
-  console.log(guestsIter.next());
-  console.log(guestsIter.next());
-  console.log(guestsIter.next());
-  console.log(guestsIter.next());
-  console.log(guestsIter.next());
-  console.log(guestsIter.next());
+  console.log(guests.next());
+  console.log(guests.next());
+  console.log(guests.next());
+  console.log(guests.next());
+  console.log(guests.next());
+  console.log(guests.next());
   console.log('---')
   console.log(Array.from(party2018.guestList));
+  for (const guest of party2018.guestList) {
+    console.log('guestList', guest);
+  }
+  console.log(Array.from(party2018));
   for (const guest of party2018) {
-    console.log(guest);
+    console.log('Symbol.iterator', guest);
   }
 
 };
