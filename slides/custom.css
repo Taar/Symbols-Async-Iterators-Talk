@@ -38,3 +38,8 @@ pre em {
 .green {
   color: rgba(0, 255, 0, 0.7);
 }
+
+.getter-setter {
+  color: rgba(0, 255, 0, 1);
+  display: inline-block;
+}

@@ -173,25 +173,39 @@ Symbol.keyFor(myGlobalSymbol);
 <code class="javascript">
 // Computed Property names
 const obj = {
-  [1]: 'one',
-  [foo]: 'wat',
-  [`on${click}`]: () =&gt; {},
+  [<div class="animation-anchor one">1</div>]: 'one',
+  [<div class="animation-anchor two">foo</div>]: 'wat',
+  [<div class="animation-anchor three">`on${eventName}`</div>]: () =&gt; {},
 };
-</div>
 </code>
     </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.three">
+    </div>
   </div>
 
   <div>
     <pre>
 <code class="javascript">
 const <div class="animation-anchor one">Person</div> = (() =&gt; {
-  <div class="animation-anchor two"></span>const invitedS = Symbol('invited');
+  <div class="animation-anchor two">const <div class="animation-anchor three">invitedS = Symbol('invited');</div>
 
-<div class="animation-anchor three">return</div> class Person_ {
+<div class="animation-anchor four">return class Person_</div> {
   // ...
 };</div>
-})();  // closure
+})();
 </code>
     </pre>
     <div class="animate-me move"
@@ -213,35 +227,75 @@ const <div class="animation-anchor one">Person</div> = (() =&gt; {
          data-color="rgba(255, 0, 0, 0.7)"
          data-element-selector=".animation-anchor.three">
     </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.four">
+    </div>
   </div>
 
   <div>
     <pre>
 <code class="javascript">
   // ...
-  constructor({ name, invite = false }) {
-    this.name = name;
-    this[<span class="animation-anchor-one">invitedS</span>] = invite;
+  constructor(<div class="animation-anchor one">{ name, invite = false }</div>) {
+    <div class="animation-anchor two">this.name = name;</div>
+    this[<div class="animation-anchor three">invitedS</div>] = invite;
   }
   // ...
 </code>
     </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.three">
+    </div>
   </div>
 
   <div>
     <pre>
 <code class="javascript">
   // ...
-  set isInvited(inviteStatus) {
-    this[invitedS] = inviteStatus;
+  <div class="animation-anchor one"><div class="getter-setter">set</div> isInvited(inviteStatus)</div> {
+    this[<div class="animation-anchor two">invitedS</div>] = inviteStatus;
   }
 
-  get isInvited() {
-    return this[invitedS];
+  <div class="animation-anchor three"><div class="getter-setter">get</div> isInvited()</div> {
+    return this[<div class="animation-anchor four">invitedS</div>];
   }
   // ...
 </code>
     </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.three">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.four">
+    </div>
   </div>
 
   <div>
@@ -249,12 +303,17 @@ const <div class="animation-anchor one">Person</div> = (() =&gt; {
 <code class="javascript">
   // ...
   // Works with Object.prototype.toString()
-  get [Symbol.toStringTag]() {
+  <div class="animation-anchor one"><div class="getter-setter">get</div> [Symbol.toStringTag]()</div> {
     return this.name;
   }
   // ...
 </code>
     </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
   </div>
 
   <div>
@@ -262,8 +321,12 @@ const <div class="animation-anchor one">Person</div> = (() =&gt; {
 <code class="javascript">
   const dwight = new Person({ name: 'Dwight', invite: true });
 
-  dwight.isInvited;
-  // true
+  <div class="animation-anchor one">dwight.isInvited;</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.one">
+// true
+</div>
 </code>
     </pre>
   </div>
@@ -271,10 +334,18 @@ const <div class="animation-anchor one">Person</div> = (() =&gt; {
   <div>
     <pre>
 <code class="javascript">
-  dwight.toString()
-  // 'Dwight'
-  `${dwight}`
-  // 'Dwight'
+  <div class="animation-anchor one">dwight.toString()</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.one">
+// 'Dwight'
+</div>
+  <div class="animation-anchor two">`${dwight}`</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.two">
+// 'Dwight'
+</div>
 </code>
     </pre>
   </div>
@@ -282,8 +353,12 @@ const <div class="animation-anchor one">Person</div> = (() =&gt; {
   <div>
     <pre>
 <code class="javascript">
-  JSON.stringify(dwight);
-  // { "name": "Dwight" }
+  <div class="animation-anchor one">JSON.stringify(dwight);</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.one">
+// { "name": "Dwight" }
+</div>
 </code>
     </pre>
     <notes>JSON.stringify() ignores Symbol-keyed properties</notes>
@@ -292,8 +367,12 @@ const <div class="animation-anchor one">Person</div> = (() =&gt; {
   <div>
     <pre>
 <code class="javascript">
-  Object.getOwnPropertyNames(dwight);
-  // Array [ 'name' ]
+  <div class="animation-anchor one">Object.getOwnPropertyNames(dwight);</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.one">
+// Array [ 'name' ]
+</div>
 </code>
     </pre>
     <notes>Doesn't show Symbol-keyed properties</notes>
@@ -302,14 +381,30 @@ const <div class="animation-anchor one">Person</div> = (() =&gt; {
   <div>
     <pre>
 <code class="javascript">
-  Object.getOwnPropertySymbols(dwight);
-  // Array [ 'symbol('invited')' ]
+  <div class="animation-anchor one">Object.getOwnPropertySymbols(dwight);</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.one">
+// Array [ 'symbol('invited')' ]
+</div>
 </code>
     </pre>
     <notes>Only get Symbol-keyed properties</notes>
   </div>
 
   <!-- END SYMBOLS -->
+
+  <!-- START ITERATORS -->
+
+  <div>
+    <pre>
+<code class="javascript">
+  Symbol.Iterator
+</code>
+    </pre>
+  </div>
+
+  <!-- END ITERATORS -->
 
 </body>
 </html>
