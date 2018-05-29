@@ -82,6 +82,61 @@ const GeneratorExmaples = (console) => {
   }
   */
 
+  // Can't use arrow functions to create generators
+  // https://stackoverflow.com/questions/27661306/can-i-use-es6s-arrow-function-syntax-with-generators-arrow-notation#27661420
+  function* oneAndTwo() {
+    yield 1;
+    yield 2;
+  }
+
+  const generator = oneAndTwo();
+  console.log(generator.next());
+  console.log(generator.next());
+  console.log(generator.next());
+
+  console.log('---');
+
+  function* addGen(start) {
+    let x = start;
+    let y = yield start;
+    while (true) {
+      x += y;
+      y = yield x;
+    }
+  }
+
+  const add = addGen(0);
+  console.log(add.next());
+  console.log(add.next(5));
+  console.log(add.next(5));
+
+  console.log('---');
+
+  function* countingGen() {
+    yield* oneAndTwo();
+    yield 3;
+    yield 4;
+  }
+
+  const counting = countingGen();
+  console.log(counting.next());
+  console.log(counting.next());
+  console.log(counting.next());
+  console.log(counting.next());
+  console.log(counting.next());
+
+  console.log('---');
+
+  function* pizzaToppings() {
+    yield* ['cheese', 'pepperoni', 'bacon'];
+  }
+
+  const pizza = pizzaToppings();
+  console.log(pizza.next());
+  console.log(pizza.next());
+  console.log(pizza.next());
+  console.log(pizza.next());
+
   const party2018 = new Party();
   party2018.add(new Person({ name: 'Jim', invite: true }));
   party2018.add(new Person({ name: 'Pam', invite: true }));

@@ -696,5 +696,111 @@ for (const <div class="animation-anchor three">guest</div> <div class="animation
 
   <!-- END ITERATORS -->
 
+  <!-- START GENERATORS -->
+
+  <div>
+    <pre>
+<code class="javascript">
+yield moarPizza;
+</code>
+    </pre>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+<div class="animation-anchor one">function*</div> oneAndTwo() {
+  <div class="animation-anchor two">yield</div> <div class="animation-anchor three">1</div>;
+  yield 2;
+}
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.three">
+    </div>
+    <notes>Can't create generators with the arrow function. Same reasoning for C#</notes>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+const generator = oneAndTwo();
+<div class="animation-anchor one">generator.next();</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.one">
+// { value: 1, done: false }
+</div>
+<div class="animation-anchor two">generator.next();</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.two">
+// { value: 2, done: false }
+</div>
+<div class="animation-anchor three">generator.next();</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.three">
+// { value: undefined, done: true }
+</div>
+</code>
+    </pre>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+function* addGen(start) {
+  <div class="animation-anchor one">let x = start;</div>
+  <div class="animation-anchor three">let y =</div> <div class="animation-anchor two">yield start</div>;
+  <div class="animation-anchor four">while (true)</div> {
+    x += y;
+    <div class="animation-anchor five">y = yield x;</div>
+  }
+}
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.three">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.four">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.five">
+    </div>
+    <notes></notes>
+  </div>
+
+  <!-- END GENERATORS -->
+
 </body>
 </html>
