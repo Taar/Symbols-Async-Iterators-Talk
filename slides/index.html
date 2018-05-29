@@ -800,6 +800,32 @@ function* addGen(start) {
     <notes></notes>
   </div>
 
+  <div>
+    <pre>
+<code class="javascript">
+const add = addGen(0);
+<div class="animation-anchor one">add.next();</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.one">
+// { value: 0, done: false }
+</div>
+<div class="animation-anchor two">add.next(5);</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.two">
+// { value: 5, done: false }
+</div>
+<div class="animation-anchor three">add.next(5);</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.three">
+// { value: 10, done: false }
+</div>
+</code>
+    </pre>
+  </div>
+
   <!-- END GENERATORS -->
 
 </body>
