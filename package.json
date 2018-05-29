@@ -6,8 +6,16 @@
   "repository": "git@github.com:Taar/Symbols-Async-Iterators-Talk.git",
   "author": "Randy Topliffe <randytopliffe@gmail.com>",
   "private": true,
+  "scripts": {
+    "start": "cd ./slides/ && big-presentation-serve",
+    "start-examples": "http-server ./src/"
+  },
   "devDependencies": {
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.11.0"
+  },
+  "dependencies": {
+    "big-presentation": "^3.3.0",
+    "http-server": "^0.11.1"
   }
 }
