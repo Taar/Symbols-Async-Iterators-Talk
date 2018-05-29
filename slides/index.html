@@ -516,7 +516,7 @@ party2018.add(new Person({ name: 'Andy', invite: true }));
     <pre>
 <code class="javascript">
 // ...
-<div class="getter-setter">get</div> guestList () {
+<div class="getter-setter">get</div> guestList() {
   return this[guestList].<div class="animation-anchor one">values()</div>;
 }
 // ...
@@ -533,7 +533,7 @@ party2018.add(new Person({ name: 'Andy', invite: true }));
   <div>
     <pre>
 <code class="javascript">
-const guests = party2018.guestList;
+const guests = party2018.guestList();
 <div class="animation-anchor one">guests.next</div>
 <div class="animate-me move"
      data-animation-fn="below"
@@ -588,15 +588,6 @@ for (const <div class="animation-anchor three">guest</div> <div class="animation
   </div>
 
   <div>
-    <pre>
-<code class="javascript">
-// ... Party class
-<div class="animation-anchor one">[Symbol.iterator]()</div> {
-  <div class="animation-anchor two">return this[guestList].values();</div>
-}
-// ...
-</code>
-    </pre>
     <div class="animate-me move"
          data-animation-fn="underline"
          data-color="rgba(255, 0, 0, 0.7)"
@@ -606,6 +597,29 @@ for (const <div class="animation-anchor three">guest</div> <div class="animation
          data-animation-fn="underline"
          data-color="rgba(255, 0, 0, 0.7)"
          data-element-selector=".animation-anchor.two">
+    </div>
+    <pre>
+<code class="javascript">
+// ...
+<div class="animation-anchor two"><div class="getter-setter">get</div> guestList()</div> {
+  <div class="animation-anchor four">return this[guestList].values();</div>
+}
+
+<div class="animation-anchor one">[Symbol.iterator]()</div> {
+  <div class="animation-anchor three">return this[guestList].values();</div>
+}
+// ...
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.three">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.four">
     </div>
     <notes>
       [Symbol.iterator] needs to return an iterator
