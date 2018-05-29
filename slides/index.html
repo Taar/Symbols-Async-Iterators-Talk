@@ -826,6 +826,166 @@ const add = addGen(0);
     </pre>
   </div>
 
+  <div>
+    <pre>
+<code class="javascript">
+function* countingGen() {
+  <div class="animation-anchor one">yield*</div> oneAndTwo();
+  <div class="animation-anchor two">yield 3;</div>
+  yield 4;
+}
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
+    </div>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+const counting = countingGen();
+<div class="animation-anchor one">counting.next();</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.one">
+// { value: 1, done: false }
+</div>
+<div class="animation-anchor two">counting.next();</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.two">
+// { value: 2, done: false }
+</div>
+<div class="animation-anchor three">counting.next();
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.three">
+// { value: 3, done: false }
+</div>
+</code>
+    </pre>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+function* pizzaToppings() {
+  <div class="animation-anchor one">yield* ['cheese', 'bacon', 'pepperoni'];</div>
+}
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+const pizza = pizzaToppings();
+<div class="animation-anchor one">pizza.next();</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.one">
+// { value: 'cheese', done: false }
+</div>
+<div class="animation-anchor two">pizza.next();</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.two">
+// { value: 'bacon', done: false }
+</div>
+</code>
+    </pre>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+  // ...
+  <div class="animation-anchor one">* </div>[Symbol.iterator]() {
+    <div class="animation-anchor two">for (const guest of this[guestList].values())</div> {
+      if (guest.isInvited) {
+        <div class="animation-anchor three">yield guest.name;</div>
+      }
+    }
+  }
+  // ...
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.three">
+    </div>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+party2018.uninvite([<div class="animation-anchor one">'Michael'</div>, <div class="animation-anchor two">'Andy'</div>]);
+
+<div class="animation-anchor three">for (const guest of party2018)</div> {
+  console.log(guest);
+}
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.three">
+    </div>
+  </div>
+
+  <div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <pre>
+<code class="javascript">
+const guests = <div class="animation-anchor one">[...party2018]</div>;
+<div class="animation-anchor two">`People Invited: ${guests.join(', ')}`</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.two">
+// People Invited: Jim, Pam, Dwight
+</div>
+</code>
+    </pre>
+  </div>
+
   <!-- END GENERATORS -->
 
 </body>

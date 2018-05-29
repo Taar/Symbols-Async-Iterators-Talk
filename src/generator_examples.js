@@ -128,7 +128,7 @@ const GeneratorExmaples = (console) => {
   console.log('---');
 
   function* pizzaToppings() {
-    yield* ['cheese', 'pepperoni', 'bacon'];
+    yield* ['cheese', 'bacon', 'pepperoni'];
   }
 
   const pizza = pizzaToppings();
@@ -149,7 +149,9 @@ const GeneratorExmaples = (console) => {
   }
 
   party2018.uninvite(['Michael', 'Andy']);
-  console.log(`People Invited: ${[...party2018]}`);
+
+  const guests = [...party2018];
+  console.log(`People Invited: ${guests.join(', ')}`);
 };
 
 window[Symbol.for('functionReference')] = GeneratorExmaples;
