@@ -5,7 +5,7 @@ The goal of this talk to give a high level overview of the following:
 - Symbols
 - Iterators (Symbol.iterator)
 - Generators
-- Async Iterators/Generators
+- Async Iterators/Generators (Symbol.asyncIterator)
 
 A long with the slides, I've provided example code which you can run in your browser of choice and code pen links so you can easily share and modify the examples.
 

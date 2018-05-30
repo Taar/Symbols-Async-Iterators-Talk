@@ -40,10 +40,52 @@
       data-animation-fn="slideFromTo"
       data-animation-from="3x1"
       data-animation-to="center">
-      Generators
       <pre>
-<code class="javascript">
-yield moarPizza;
+<code>
+Symbols
+</code>
+      </pre>
+    </div>
+  </div>
+
+  <div>
+    <div class="animate-me move relative-size"
+      data-animation-fn="slideFromTo"
+      data-animation-from="3x1"
+      data-animation-to="center">
+      <pre>
+<code>
+Iterators
+
+Symbol.iterator
+</code>
+      </pre>
+    </div>
+  </div>
+
+  <div>
+    <div class="animate-me move relative-size"
+      data-animation-fn="slideFromTo"
+      data-animation-from="3x1"
+      data-animation-to="center">
+      <pre>
+<code>
+Generators
+</code>
+      </pre>
+    </div>
+  </div>
+
+  <div>
+    <div class="animate-me move relative-size"
+      data-animation-fn="slideFromTo"
+      data-animation-from="3x1"
+      data-animation-to="center">
+      <pre>
+<code>
+Async Iterators/Generators
+
+Symbol.asyncIterator
 </code>
       </pre>
     </div>
@@ -131,9 +173,14 @@ Symbol('pizza') === Symbol('pizza');
   </div>
 
   <div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
     <pre>
 <code class="javascript">
-const myGlobalSymbol = Symbol.for('myGlobalSymbol');
+const myGlobalSymbol = Symbol.<div class="animation-anchor one">for('myGlobalSymbol')</div>;
 
 <span class="animation-anchor-one"></span>myGlobalSymbol === Symbol.for('myGlobalSymbol');
 <div class="animate-me move"
@@ -151,9 +198,14 @@ const myGlobalSymbol = Symbol.for('myGlobalSymbol');
   </div>
 
   <div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
     <pre>
 <code class="javascript">
-Symbol.keyFor(myGlobalSymbol);
+Symbol.<div class="animation-anchor one">keyFor(myGlobalSymbol)</div>;
 <div class="animate-me move"
      data-animation-fn="below"
      data-element-selector=".javascript :first-child">
@@ -166,7 +218,7 @@ Symbol.keyFor(myGlobalSymbol);
     </notes>
   </div>
 
-  <div>How is this useful?</div>
+  <div><span class="no-wrap">How is this useful?</span></div>
 
   <div>
     <pre>
@@ -205,13 +257,18 @@ const <div class="animation-anchor one">Person</div> = (() =&gt; {
 <div class="animation-anchor four">return class Person_</div> {
   // ...
 };</div>
-})();
+})<div class="animation-anchor five">();</div>
 </code>
     </pre>
     <div class="animate-me move"
          data-animation-fn="underline"
          data-color="rgba(255, 0, 0, 0.7)"
          data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.five">
     </div>
     <div class="animate-me move green"
          data-animation-fn="centerLeftOf"
@@ -304,7 +361,7 @@ const <div class="animation-anchor one">Person</div> = (() =&gt; {
   // ...
   // Works with Object.prototype.toString()
   <div class="animation-anchor one"><div class="getter-setter">get</div> [Symbol.toStringTag]()</div> {
-    return this.name;
+    <div class="animation-anchor two">return this.name;</div>
   }
   // ...
 </code>
@@ -313,6 +370,11 @@ const <div class="animation-anchor one">Person</div> = (() =&gt; {
          data-animation-fn="underline"
          data-color="rgba(255, 0, 0, 0.7)"
          data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
     </div>
   </div>
 
@@ -399,7 +461,7 @@ const <div class="animation-anchor one">Person</div> = (() =&gt; {
   <div>
     <pre>
 <code class="javascript">
-  Symbol.Iterator
+  Symbol.iterator
 </code>
     </pre>
   </div>
@@ -457,8 +519,8 @@ const <div class="animation-anchor one">iterFactory = () =&gt;</div> {
   <div>
     <pre>
 <code class="javascript">
-const Party = (() =&gt; {
-  const <div class="animation-anchor one">guestListS = Symbol('guestList')</div>;
+const <div class="animation-anchor one">Party</div> = (() =&gt; {
+  const <div class="animation-anchor two">guestListS = Symbol('guestList')</div>;
 
   return class Party_ {
     // ...
@@ -470,6 +532,11 @@ const Party = (() =&gt; {
          data-animation-fn="underline"
          data-color="rgba(255, 0, 0, 0.7)"
          data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
     </div>
   </div>
 
@@ -533,7 +600,7 @@ party2018.add(new Person({ name: 'Andy', invite: true }));
   <div>
     <pre>
 <code class="javascript">
-const guests = party2018.guestList();
+const guests = party2018.guestList;
 <div class="animation-anchor one">guests.next</div>
 <div class="animate-me move"
      data-animation-fn="below"
@@ -544,8 +611,9 @@ const guests = party2018.guestList();
 <div class="animate-me move"
      data-animation-fn="below"
      data-element-selector=".animation-anchor.two">
-// { value: 'Jim', done: true }
+// { value: 'Jim', done: false }
 </div>
+// ...
 <div class="animation-anchor three">guests.next()</div>
 <div class="animate-me move"
      data-animation-fn="below"
@@ -701,7 +769,7 @@ for (const <div class="animation-anchor three">guest</div> <div class="animation
   <div>
     <pre>
 <code class="javascript">
-yield moarPizza;
+Generators
 </code>
     </pre>
   </div>
@@ -734,9 +802,14 @@ yield moarPizza;
   </div>
 
   <div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.four">
+    </div>
     <pre>
 <code class="javascript">
-const generator = oneAndTwo();
+const generator = <div class="animation-anchor four">oneAndTwo()</div>;
 <div class="animation-anchor one">generator.next();</div>
 <div class="animate-me move"
      data-animation-fn="below"
@@ -806,9 +879,14 @@ function* addGen(start) {
   </div>
 
   <div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.four">
+    </div>
     <pre>
 <code class="javascript">
-const add = addGen(0);
+const add = <div class="animation-anchor four">addGen(0)</div>;
 <div class="animation-anchor one">add.next();</div>
 <div class="animate-me move"
      data-animation-fn="below"
@@ -835,7 +913,7 @@ const add = addGen(0);
     <pre>
 <code class="javascript">
 function* countingGen() {
-  <div class="animation-anchor one">yield*</div> oneAndTwo();
+  <div class="animation-anchor one">yield*</div> <div class="animation-anchor three">oneAndTwo()</div>;
   <div class="animation-anchor two">yield 3;</div>
   yield 4;
 }
@@ -849,14 +927,24 @@ function* countingGen() {
     <div class="animate-me move"
          data-animation-fn="underline"
          data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.three">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
          data-element-selector=".animation-anchor.two">
     </div>
   </div>
 
   <div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.four">
+    </div>
     <pre>
 <code class="javascript">
-const counting = countingGen();
+const counting = <div class="animation-anchor four">countingGen()</div>;
 <div class="animation-anchor one">counting.next();</div>
 <div class="animate-me move"
      data-animation-fn="below"
@@ -895,9 +983,14 @@ function* pizzaToppings() {
   </div>
 
   <div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.three">
+    </div>
     <pre>
 <code class="javascript">
-const pizza = pizzaToppings();
+const pizza = <div class="animation-anchor three">pizzaToppings()</div>;
 <div class="animation-anchor one">pizza.next();</div>
 <div class="animate-me move"
      data-animation-fn="below"
@@ -1052,7 +1145,7 @@ asyncIter.<div class="animation-anchor one">next()</div>
   <div>
     <pre>
 <code class="javascript">
-<div class="animation-anchor one">for await</div> (const user <div class="animation-anchor two">of Users.all()</div>) {
+<div class="animation-anchor one">for await</div> (const user <div class="animation-anchor two">of Users</div>) {
   console.log(user);
 }
 </code>
@@ -1102,11 +1195,41 @@ asyncIter.<div class="animation-anchor one">next()</div>
     <pre>
 <code class="javascript">
   // ...
+  <div class="animation-anchor one">[Symbol.asyncIterator]()</div> {
+    /* async stuff */
+  }
+
+  <div class="animation-anchor two">* [Symbol.asyncIterator]()</div> {
+    /* async stuff */
+  }
+  // ...
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
+    </div>
+  </div>
+
+  <div>
+    <span class="no-wrap">Not production ready!</span>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+  // ...
   <div class="animation-anchor one">* [Symbol.iterator]()</div> {
     const guests = this[guestList].values();
     <div class="animation-anchor two">for (const guest of guests</div>) {
       <div class="animation-anchor three">yield new Promise</div>(resolve =&gt;
-        <div class="animation-anchor four">setTimeout</div>(() =&gt; resolve(guest.name), <div class="animation-anchor five">1000</div>));
+        <div class="animation-anchor four">setTimeout</div>(() =&gt; resolve(<div class="animation-anchor six">{ value: guest, done: false }</div>), <div class="animation-anchor five">1000</div>));
     }
   }
   // ...
@@ -1136,6 +1259,11 @@ asyncIter.<div class="animation-anchor one">next()</div>
          data-animation-fn="underline"
          data-color="rgba(255, 0, 0, 0.7)"
          data-element-selector=".animation-anchor.five">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.six">
     </div>
     <notes>Note: JS doesn't enforce { value, done } being yielded</notes>
   </div>

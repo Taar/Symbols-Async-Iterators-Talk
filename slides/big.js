@@ -459,11 +459,15 @@ window.addEventListener('load', function() {
     case "ArrowLeft":
     case "ArrowUp":
     case "PageUp":
+    case "h":
+    case "j":
       if (big.mode === "talk") reverse();
       break;
     case "ArrowRight":
     case "ArrowDown":
     case "PageDown":
+    case "l":
+    case "k":
       if (big.mode === "talk") forward();
       break;
     case "p":

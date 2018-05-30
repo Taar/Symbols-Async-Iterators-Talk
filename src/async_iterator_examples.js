@@ -54,13 +54,44 @@ class PartDatabase {
     const guests = this[guestList].values();
     for (const guest of guests) {
       yield await (new Promise((resolve, reject) =>
-        setTimeout(() => resolve(guest.name), 1000)
+        setTimeout(() => resolve({ value: guest, done: false }), 1000)
       ));
     }
   }
 }
 
-const partyDB = new PartyDatabase();
+const PartyDB = (() => {
+  const guestList = Symbol('guestList');
+
+  return class PartyDB_ {
+    constructor(guests = []) {
+      this[guestList] = new Set(guests);
+    }
+
+    add(guest) {
+      this[guestList].add(guest);
+    }
+
+    uninvite(names) {
+      const changeInvitationStatus =
+        guest => (uninvite, name) => !(!uninvite || guest.name === name);
+      for (const guest of this[guestList].values()) {
+        guest.isInvited = names.reduce(changeInvitationStatus(guest), true);
+      }
+    }
+
+    * [Symbol.asyncIterator]() {
+      const guests = this[guestList].values();
+      for (const guest of guests) {
+        yield await (new Promise((resolve, reject) =>
+          setTimeout(() => resolve({ value: guest, done: false }), 1000)
+        ));
+      }
+    }
+  };
+})();
+
+const partyDB = new PartyDB();
 partyDB.add(new Person({name: 'Jim', invite: true}));
 partyDB.add(new Person({name: 'Pam', invite: true}));
 partyDB.add(new Person({name: 'Michael', invite: true}));
@@ -85,10 +116,10 @@ This is how you can get this feature now (sort of)
 
 /* eslint-disable-next-line no-unused-vars */
 const AsyncNowExamples = (console) => {
-  const PartyDatabase = (() => {
+  const Party = (() => {
     const guestList = Symbol('guestList');
 
-    class Party {
+    return class Party_ {
       constructor(guests = []) {
         this[guestList] = new Set(guests);
       }
@@ -110,23 +141,21 @@ const AsyncNowExamples = (console) => {
         const guests = this[guestList].values();
         for (const guest of guests) {
           yield new Promise(resolve =>
-            setTimeout(() => resolve(guest.name), 1000));
+            setTimeout(() => resolve({ value: guest, done: false }), 1000));
         }
       }
-    }
-
-    return Party;
+    };
   })();
 
-  const partyDB = new PartyDatabase();
-  partyDB.add(new Person({ name: 'Jim', invite: true }));
-  partyDB.add(new Person({ name: 'Pam', invite: true }));
-  partyDB.add(new Person({ name: 'Michael', invite: true }));
-  partyDB.add(new Person({ name: 'Dwight', invite: true }));
-  partyDB.add(new Person({ name: 'Andy', invite: true }));
+  const party2018 = new Party();
+  party2018.add(new Person({ name: 'Jim', invite: true }));
+  party2018.add(new Person({ name: 'Pam', invite: true }));
+  party2018.add(new Person({ name: 'Michael', invite: true }));
+  party2018.add(new Person({ name: 'Dwight', invite: true }));
+  party2018.add(new Person({ name: 'Andy', invite: true }));
 
   (async () => {
-    for (const guestPromise of partyDB) {
+    for (const guestPromise of party2018) {
       /* eslint-disable-next-line no-await-in-loop */
       const guest = await guestPromise;
       console.log(guest);
