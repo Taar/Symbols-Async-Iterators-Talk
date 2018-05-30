@@ -4,7 +4,7 @@
  * Part 3: Generators with `[Symbol.iterator]`
  * Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield
  * Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator
- * CodePen Link: https://codepen.io/Taar/pen/oygeya?editors=0012
+ * CodePen Link: https://codepen.io/Taar/pen/oygeya
 */
 
 const Person = (() => {

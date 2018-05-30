@@ -19,7 +19,7 @@ To run the example code, run the following command:
 
 Code Pen Links:
 
-[Symbols](https://codepen.io/Taar/pen/RyxmYr/)
-[Iterators](https://codepen.io/Taar/pen/PawKXw)
-[Generators](https://codepen.io/Taar/pen/oygeya)
-[Async Iterators/Generators](https://codepen.io/Taar/pen/ZRYJPa)
+- [Symbols](https://codepen.io/Taar/pen/RyxmYr/)
+- [Iterators](https://codepen.io/Taar/pen/PawKXw)
+- [Generators](https://codepen.io/Taar/pen/oygeya)
+- [Async Iterators/Generators](https://codepen.io/Taar/pen/ZRYJPa)

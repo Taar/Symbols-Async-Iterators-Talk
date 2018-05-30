@@ -3,7 +3,7 @@
 /*
  * Part 2: Iterators `[Symbol.iterator]`
  * Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
- * CodePen Link: https://codepen.io/Taar/pen/PawKXw?editors=0012
+ * CodePen Link: https://codepen.io/Taar/pen/PawKXw
 */
 
 const Person = (() => {
