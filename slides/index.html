@@ -757,6 +757,11 @@ const generator = oneAndTwo();
 </div>
 </code>
     </pre>
+    <notes>
+      Other methods include:
+      return: returns the given value { value, done: true } and stops the iteration.
+      throw: sends an error to the generator which it has to catch and handle.
+    </notes>
   </div>
 
   <div>
@@ -987,6 +992,208 @@ const guests = <div class="animation-anchor one">[...party2018]</div>;
   </div>
 
   <!-- END GENERATORS -->
+
+  <!-- START ASYNC ITERATOR -->
+
+  <div>
+    <pre>
+<code class="javascript">
+Symbol.asyncIterator
+</code>
+    </pre>
+  </div>
+
+  <div>
+    <span class="no-wrap">Stage 2</span>
+  </div>
+
+  <div>
+    <span class="no-wrap"><i class="fab fa-github"></i> tc39/proposals</span>
+  </div>
+
+  <div>
+    <span class="no-wrap"><i class="fab fa-github"></i> tc39/proposal-async-iteration</span>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+<div class="animation-anchor one">asyncIter.next()</div>
+<div class="animate-me move"
+     data-animation-fn="below"
+     data-element-selector=".animation-anchor.one">
+// Promise
+</div>
+</code>
+    </pre>
+    <notes>next returns a promise rather than an object { value, done }</notes>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+asyncIter.<div class="animation-anchor one">next()</div>
+  <div class="animation-anchor two">.then(({ value, done })</div> =&gt; /* ... */ );
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
+    </div>
+    <notes>The promise return should resolve with an object with the properties value and done</notes>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+<div class="animation-anchor one">for await</div> (const user <div class="animation-anchor two">of Users.all()</div>) {
+  console.log(user);
+}
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
+    </div>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+<div class="animation-anchor one">async function*</div> fetchGuests(partyId) {
+  <div class="animation-anchor two">yield await</div> fetch(/* ... */);
+  <div class="animation-anchor three">await</div> fetch(/* ... */);
+}
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.three">
+    </div>
+    <notes>
+      async generators have more methods, next, throw, and return.
+    </notes>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+  // ...
+  <div class="animation-anchor one">* [Symbol.iterator]()</div> {
+    const guests = this[guestList].values();
+    <div class="animation-anchor two">for (const guest of guests</div>) {
+      <div class="animation-anchor three">yield new Promise</div>(resolve =&gt;
+        <div class="animation-anchor four">setTimeout</div>(() =&gt; resolve(guest.name), <div class="animation-anchor five">1000</div>));
+    }
+  }
+  // ...
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.three">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.four">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.five">
+    </div>
+    <notes>Note: JS doesn't enforce { value, done } being yielded</notes>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+const partyDB = new PartyDatabase();
+partyDB.add(new Person({ name: 'Jim', invite: true }));
+partyDB.add(new Person({ name: 'Pam', invite: true }));
+partyDB.add(new Person({ name: 'Michael', invite: true }));
+partyDB.add(new Person({ name: 'Dwight', invite: true }));
+partyDB.add(new Person({ name: 'Andy', invite: true }));
+</code>
+    </pre>
+    <notes></notes>
+  </div>
+
+  <div>
+    <pre>
+<code class="javascript">
+<div class="animation-anchor one">(async () =&gt; {</div>
+  <div class="animation-anchor three">for (const guestPromise of partyDB)</div> {
+    const guest = <div class="animation-anchor four">await guestPromise;</div>
+    console.log(guest);
+  }
+})<div class="animation-anchor two">();</div>
+</code>
+    </pre>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.one">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.two">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.three">
+    </div>
+    <div class="animate-me move"
+         data-animation-fn="underline"
+         data-color="rgba(255, 0, 0, 0.7)"
+         data-element-selector=".animation-anchor.four">
+    </div>
+    <notes></notes>
+  </div>
+
+  <!-- END ASYNC ITERATOR -->
+
+  <div>
+    <center><span class="no-wrap">Fin!</span></center>
+    <p>@RandyTopliffe</p>
+  </div>
 
 </body>
 </html>

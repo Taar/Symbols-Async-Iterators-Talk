@@ -43,3 +43,7 @@ pre em {
   color: rgba(0, 255, 0, 1);
   display: inline-block;
 }
+
+.no-wrap {
+  white-space: pre;
+}

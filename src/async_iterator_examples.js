@@ -2,8 +2,8 @@
 
 /*
  * Part 4: Async Iterator `[Symbol.asyncIterator]`
- * Reference:
- * CodePen Link:
+ * Reference: https://github.com/tc39/proposal-async-iteration
+ * CodePen Link: https://codepen.io/Taar/pen/ZRYJPa
 */
 
 const Person = (() => {
@@ -109,7 +109,8 @@ const AsyncNowExamples = (console) => {
         // { value: Promise, done: Boolean }
         const guests = this[guestList].values();
         for (const guest of guests) {
-          yield (new Promise(resolve => setTimeout(() => resolve(guest.name), 1000)));
+          yield new Promise(resolve =>
+            setTimeout(() => resolve(guest.name), 1000));
         }
       }
     }
